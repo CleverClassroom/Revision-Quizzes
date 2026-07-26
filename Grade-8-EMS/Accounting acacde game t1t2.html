@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 8 Accounting Arcade</title>
+<style>
+body{
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#1a237e,#1565c0);
+color:white;
+text-align:center;
+margin:0;
+padding:20px;
+}
+.container{
+max-width:900px;
+margin:auto;
+}
+h1{
+font-size:48px;
+}
+.card{
+background:rgba(255,255,255,0.12);
+padding:30px;
+border-radius:20px;
+margin-top:30px;
+}
+button{
+padding:15px 20px;
+margin:10px;
+font-size:18px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+}
+.option{
+display:block;
+width:80%;
+margin:12px auto;
+background:white;
+color:black;
+}
+.option:hover{
+background:#ffe082;
+}
+#score{
+font-size:28px;
+margin-bottom:20px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>💰 Grade 8 Accounting Arcade 💰</h1>
+
+<div class="card">
+<div id="score">Score: 0</div>
+<h2 id="question">Loading...</h2>
+<div id="answers"></div>
+</div>
+</div>
+
+<script>
+const questions = [
+{
+q:"Received R5 000 cash for services rendered",
+a:[
+"Assets + ; Owner's Equity + ; Liabilities no effect",
+"Assets - ; Owner's Equity + ; Liabilities no effect",
+"Assets + ; Liabilities +"
+],
+correct:0
+},
+{
+q:"Paid water and electricity by EFT",
+a:["CRJ","CPJ","Both"],
+correct:1
+},
+{
+q:"Equipment is classified as a...",
+a:["Asset","Liability","Expense"],
+correct:0
+},
+{
+q:"Which source document is proof of money received?",
+a:["Receipt","Invoice","Bank statement"],
+correct:0
+},
+{
+q:"Received a loan from the bank",
+a:[
+"Assets + ; Liabilities +",
+"Assets - ; Owner's Equity -",
+"Owner's Equity +"
+],
+correct:0
+},
+{
+q:"Which journal records cash received?",
+a:["CRJ","CPJ","General Journal"],
+correct:0
+},
+{
+q:"Paid wages in cash",
+a:["CRJ","CPJ","No journal"],
+correct:1
+},
+{
+q:"Rent income is classified as...",
+a:["Income","Expense","Liability"],
+correct:0
+},
+{
+q:"The accounting equation is...",
+a:[
+"Assets = Owner's Equity + Liabilities",
+"Income = Expenses",
+"Assets = Profit"
+],
+correct:0
+},
+{
+q:"Which document is used when depositing money into the bank?",
+a:["Deposit slip","Till slip","Invoice"],
+correct:0
+}
+];
+
+let current = 0;
+let score = 0;
+
+function loadQuestion(){
+const q = questions[current];
+
+document.getElementById("question").innerHTML =
+`Question ${current+1}: ${q.q}`;
+
+let html = "";
+
+q.a.forEach((option,index)=>{
+html += `
+<button class="option" onclick="checkAnswer(${index})">
+${option}
+</button>
+`;
+});
+
+document.getElementById("answers").innerHTML = html;
+}
+
+function checkAnswer(index){
+
+if(index === questions[current].correct){
+alert("✅ Correct!");
+score++;
+}else{
+alert("❌ Incorrect!");
+}
+
+document.getElementById("score").innerHTML =
+`Score: ${score}`;
+
+current++;
+
+if(current < questions.length){
+loadQuestion();
+}else{
+finishQuiz();
+}
+}
+
+function finishQuiz(){
+document.getElementById("question").innerHTML =
+`🎉 Quiz Complete! Final Score: ${score}/${questions.length}`;
+
+document.getElementById("answers").innerHTML =
+`<button onclick="location.reload()">Play Again</button>`;
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>

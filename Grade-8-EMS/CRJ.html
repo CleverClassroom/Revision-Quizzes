@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grade 8 CRJ Practice</title>
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#ffe082,#81d4fa);
+padding:20px;
+}
+
+.container{
+max-width:1700px;
+margin:auto;
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 0 20px rgba(0,0,0,0.2);
+}
+
+h1{
+text-align:center;
+color:#ef6c00;
+font-size:3rem;
+margin-bottom:20px;
+}
+
+.instructions{
+background:#e3f2fd;
+padding:15px;
+border-radius:12px;
+margin-bottom:20px;
+font-size:1rem;
+line-height:1.6;
+}
+
+#transactionBox{
+background:#fff59d;
+padding:25px;
+border-radius:15px;
+font-size:1.3rem;
+font-weight:bold;
+margin-bottom:25px;
+line-height:1.8;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+table-layout:fixed;
+background:white;
+}
+
+th,td{
+border:2px solid black;
+padding:8px;
+text-align:center;
+vertical-align:middle;
+height:60px;
+}
+
+th{
+background:#f6b64c;
+font-size:1rem;
+font-weight:bold;
+}
+
+input{
+width:95%;
+height:40px;
+font-size:1rem;
+text-align:center;
+border:none;
+outline:none;
+background:#fffde7;
+border-radius:6px;
+text-transform:uppercase;
+}
+
+button{
+padding:15px 25px;
+margin-top:25px;
+margin-right:10px;
+font-size:1.1rem;
+font-weight:bold;
+border:none;
+border-radius:12px;
+cursor:pointer;
+color:white;
+}
+
+#checkBtn{
+background:#43a047;
+}
+
+#nextBtn{
+background:#1e88e5;
+}
+
+button:hover{
+transform:scale(1.03);
+}
+
+#feedback{
+margin-top:20px;
+font-size:1.4rem;
+font-weight:bold;
+text-align:center;
+}
+
+.correct{
+color:green;
+}
+
+.wrong{
+color:red;
+}
+
+#scoreBox{
+margin-top:15px;
+font-size:1.2rem;
+font-weight:bold;
+text-align:center;
+color:#d84315;
+}
+
+.totalRow{
+background:#ffe0b2;
+font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>CASH RECEIPTS JOURNAL</h1>
+
+<div class="instructions">
+
+<b>Instructions:</b><br>
+• Capital letters and small letters are both accepted.<br>
+• Spaces in amounts are accepted.<br>
+• Some transactions happen on the same day.<br>
+• Add the amounts together in the BANK column total row.<br>
+
+</div>
+
+<div id="transactionBox"></div>
+
+<table>
+
+<tr>
+<th rowspan="2" style="width:8%">DOC</th>
+<th rowspan="2" style="width:7%">DAY</th>
+<th rowspan="2" style="width:15%">DETAILS</th>
+<th rowspan="2" style="width:6%">FOL</th>
+<th rowspan="2" style="width:12%">ANALYSIS OF RECEIPTS</th>
+<th rowspan="2" style="width:10%">BANK</th>
+<th rowspan="2" style="width:11%">CURRENT INCOME</th>
+<th colspan="3">SUNDRY ACCOUNT</th>
+</tr>
+
+<tr>
+<th style="width:10%">AMOUNT</th>
+<th style="width:6%">FOL</th>
+<th style="width:10%">DETAILS</th>
+</tr>
+
+<!-- TRANSACTION 1 -->
+
+<tr>
+
+<td><input id="doc1"></td>
+
+<td><input id="day1"></td>
+
+<td><input id="details1"></td>
+
+<td><input id="fol1"></td>
+
+<td><input id="analysis1"></td>
+
+<td><input id="bank1"></td>
+
+<td><input id="income1"></td>
+
+<td><input id="sundryAmount1"></td>
+
+<td><input id="sundryFol1"></td>
+
+<td><input id="sundryDetails1"></td>
+
+</tr>
+
+<!-- TRANSACTION 2 -->
+
+<tr>
+
+<td><input id="doc2"></td>
+
+<td><input id="day2"></td>
+
+<td><input id="details2"></td>
+
+<td><input id="fol2"></td>
+
+<td><input id="analysis2"></td>
+
+<td><input id="bank2"></td>
+
+<td><input id="income2"></td>
+
+<td><input id="sundryAmount2"></td>
+
+<td><input id="sundryFol2"></td>
+
+<td><input id="sundryDetails2"></td>
+
+</tr>
+
+<!-- TOTALS -->
+
+<tr class="totalRow">
+
+<td colspan="5">TOTAL</td>
+
+<td><input id="bankTotal"></td>
+
+<td><input id="incomeTotal"></td>
+
+<td><input id="sundryTotal"></td>
+
+<td></td>
+
+<td></td>
+
+</tr>
+
+</table>
+
+<button id="checkBtn" onclick="checkAnswer()">Check Answer</button>
+
+<button id="nextBtn" onclick="nextQuestion()">Next Question</button>
+
+<div id="feedback"></div>
+
+<div id="scoreBox">Score: 0 / 0</div>
+
+</div>
+
+<script>
+
+const questions = [
+
+{
+
+transaction:`
+
+Transaction 1:
+Received R2 500 cash for services rendered from clients on 2 March 2025.
+Source document: CRR
+
+Transaction 2:
+Received R10 000 capital from Mr Daniels on 2 March 2025.
+Source document: R458
+
+`,
+
+answers:{
+
+doc1:"crr",
+day1:"2",
+details1:"cash",
+fol1:"",
+analysis1:"2500",
+bank1:"2500",
+income1:"2500",
+sundryAmount1:"",
+sundryFol1:"",
+sundryDetails1:"",
+
+doc2:"r458",
+day2:"2",
+details2:"mr daniels",
+fol2:"",
+analysis2:"10000",
+bank2:"10000",
+income2:"",
+sundryAmount2:"10000",
+sundryFol2:"",
+sundryDetails2:"capital",
+
+bankTotal:"12500",
+incomeTotal:"2500",
+sundryTotal:"10000"
+
+}
+
+},
+
+{
+
+transaction:`
+
+Transaction 1:
+Received a loan of R15 000 from Ubuntu Bank on 5 March 2025.
+Source document: BS101
+
+Transaction 2:
+Received R1 200 rent income from Ms Adams on 5 March 2025.
+Source document: R672
+
+`,
+
+answers:{
+
+doc1:"bs101",
+day1:"5",
+details1:"ubuntu bank",
+fol1:"",
+analysis1:"15000",
+bank1:"15000",
+income1:"",
+sundryAmount1:"15000",
+sundryFol1:"",
+sundryDetails1:"loan",
+
+doc2:"r672",
+day2:"5",
+details2:"ms adams",
+fol2:"",
+analysis2:"1200",
+bank2:"1200",
+income2:"",
+sundryAmount2:"1200",
+sundryFol2:"",
+sundryDetails2:"rent income",
+
+bankTotal:"16200",
+incomeTotal:"",
+sundryTotal:"16200"
+
+}
+
+}
+
+];
+
+let currentQuestion = 0;
+let score = 0;
+let totalAnswered = 0;
+
+function loadQuestion(){
+
+const q = questions[currentQuestion];
+
+document.getElementById("transactionBox").innerHTML =
+q.transaction.replace(/\n/g,"<br>");
+
+const inputs = document.querySelectorAll("input");
+
+inputs.forEach(input=>{
+input.value="";
+});
+
+document.getElementById("feedback").innerHTML="";
+
+}
+
+function clean(value){
+
+return value
+.trim()
+.toLowerCase()
+.replace(/\s/g,"");
+
+}
+
+function checkAnswer(){
+
+const q = questions[currentQuestion].answers;
+
+let correct = true;
+
+for(let key in q){
+
+const userValue =
+clean(document.getElementById(key).value);
+
+const answerValue =
+clean(q[key]);
+
+if(userValue !== answerValue){
+correct = false;
+}
+
+}
+
+if(correct){
+
+score++;
+
+document.getElementById("feedback").innerHTML =
+"<span class='correct'>Correct!</span>";
+
+}else{
+
+document.getElementById("feedback").innerHTML =
+"<span class='wrong'>Incorrect. Try again.</span>";
+
+}
+
+totalAnswered++;
+
+document.getElementById("scoreBox").innerText =
+"Score: " + score + " / " + totalAnswered;
+
+}
+
+function nextQuestion(){
+
+currentQuestion++;
+
+if(currentQuestion >= questions.length){
+currentQuestion = 0;
+}
+
+loadQuestion();
+
+}
+
+loadQuestion();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accounting Concepts & Cycle – Grade 8</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --asset:   #0984E3;
+  --asset-l: #EBF5FB;
+  --liab:    #D63031;
+  --liab-l:  #FDECEA;
+  --equity:  #00B894;
+  --equity-l:#E6FAF5;
+  --income:  #6C5CE7;
+  --income-l:#F0EEFF;
+  --expense: #E17055;
+  --expense-l:#FEF3EE;
+  --gold:    #FDCB6E;
+  --navy:    #2D3436;
+  --soft:    #F5F0E8;
+  --white:   #FFFDF8;
+  --shadow:  rgba(0,0,0,0.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Quicksand',sans-serif;background:#EEEAE2;color:var(--navy);min-height:100vh;}
+
+/* NAV TABS */
+.nav{background:var(--navy);display:flex;overflow-x:auto;padding:0 12px;gap:2px;position:sticky;top:0;z-index:100;}
+.nav-btn{background:none;border:none;border-bottom:3px solid transparent;color:rgba(255,255,255,.5);font-family:'Quicksand',sans-serif;font-weight:700;font-size:.8rem;padding:13px 14px;cursor:pointer;white-space:nowrap;transition:all .2s;letter-spacing:.3px;}
+.nav-btn:hover{color:var(--gold);}
+.nav-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+
+/* HERO */
+.hero{background:var(--navy);padding:28px 20px 36px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(circle at 20% 50%, rgba(9,132,227,.15) 0%, transparent 60%),
+  radial-gradient(circle at 80% 50%, rgba(108,92,231,.15) 0%, transparent 60%);}
+.hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:22px;background:#EEEAE2;clip-path:ellipse(55% 100% at 50% 100%);}
+.hero h1{font-family:'Fredoka One',cursive;font-size:2.1rem;color:#fff;letter-spacing:1px;position:relative;}
+.hero h1 span{color:var(--gold);}
+.hero p{color:rgba(255,255,255,.6);font-size:.88rem;margin-top:5px;font-weight:600;position:relative;}
+.pill-row{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap;position:relative;}
+.pill{background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:20px;color:rgba(255,255,255,.8);font-size:.75rem;font-weight:700;padding:4px 12px;}
+
+/* PAGE */
+.page{display:none;max-width:620px;margin:0 auto;padding:18px 14px 30px;}
+.page.active{display:block;}
+
+/* SECTION LABEL */
+.slabel{font-family:'Fredoka One',cursive;font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:#999;padding:0 2px;margin:18px 0 6px;}
+
+/* CONCEPT CARDS */
+.concept-grid{display:flex;flex-direction:column;gap:10px;}
+.concept-card{border-radius:16px;border:2.5px solid;padding:16px 16px 14px;box-shadow:0 3px 12px var(--shadow);position:relative;overflow:hidden;}
+.concept-card::after{content:attr(data-icon);position:absolute;right:14px;top:10px;font-size:2.2rem;opacity:.18;}
+.cc-header{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.cc-badge{font-family:'Fredoka One',cursive;font-size:.82rem;padding:4px 14px;border-radius:20px;letter-spacing:.5px;}
+.cc-title{font-family:'Fredoka One',cursive;font-size:1.2rem;}
+.cc-def{font-size:.9rem;line-height:1.55;font-weight:600;}
+.cc-example{margin-top:8px;font-size:.82rem;border-radius:8px;padding:7px 10px;font-weight:700;}
+.cc-trick{margin-top:6px;font-size:.82rem;border-radius:8px;padding:7px 10px;font-weight:700;display:flex;align-items:flex-start;gap:5px;}
+
+.cc-asset  {background:var(--asset-l);  border-color:var(--asset);}
+.cc-liab   {background:var(--liab-l);   border-color:var(--liab);}
+.cc-equity {background:var(--equity-l); border-color:var(--equity);}
+.cc-income {background:var(--income-l); border-color:var(--income);}
+.cc-expense{background:var(--expense-l);border-color:var(--expense);}
+
+.badge-asset  {background:var(--asset);  color:#fff;}
+.badge-liab   {background:var(--liab);   color:#fff;}
+.badge-equity {background:var(--equity); color:#fff;}
+.badge-income {background:var(--income); color:#fff;}
+.badge-expense{background:var(--expense);color:#fff;}
+
+.title-asset  {color:var(--asset);}
+.title-liab   {color:var(--liab);}
+.title-equity {color:var(--equity);}
+.title-income {color:var(--income);}
+.title-expense{color:var(--expense);}
+
+.ex-asset  {background:rgba(9,132,227,.1); color:#0665B0;}
+.ex-liab   {background:rgba(214,48,49,.1);  color:#A32020;}
+.ex-equity {background:rgba(0,184,148,.1);  color:#007A65;}
+.ex-income {background:rgba(108,92,231,.1); color:#4A3AA8;}
+.ex-expense{background:rgba(225,112,85,.1); color:#B05030;}
+
+/* EQUATION */
+.equation-wrap{background:var(--white);border-radius:18px;border:2.5px solid var(--navy);box-shadow:4px 4px 0 var(--navy);padding:20px 16px;margin-bottom:10px;}
+.eq-title{font-family:'Fredoka One',cursive;font-size:1.15rem;text-align:center;margin-bottom:14px;}
+.eq-row{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;}
+.eq-box{border-radius:12px;border:2.5px solid var(--navy);padding:12px 16px;text-align:center;box-shadow:3px 3px 0 var(--navy);min-width:88px;}
+.eq-box .eb-name{font-family:'Fredoka One',cursive;font-size:1.1rem;}
+.eq-box .eb-hint{font-size:.68rem;font-weight:700;opacity:.65;margin-top:1px;text-transform:uppercase;letter-spacing:.5px;}
+.eq-sign{font-family:'Fredoka One',cursive;font-size:1.8rem;color:var(--navy);}
+.eq-asset {background:var(--asset-l);}
+.eq-liab  {background:var(--liab-l);}
+.eq-equity{background:var(--equity-l);}
+.eq-note{margin-top:12px;background:var(--gold);border-radius:10px;padding:10px 12px;font-size:.85rem;font-weight:700;text-align:center;}
+
+/* MATCH GAME */
+.match-wrap{}
+.match-instruction{background:var(--white);border-radius:12px;padding:10px 14px;font-size:.86rem;font-weight:700;margin-bottom:12px;border:2px solid #DDD;text-align:center;}
+.match-cols{display:flex;gap:10px;}
+.match-col{flex:1;display:flex;flex-direction:column;gap:7px;}
+.match-col-label{font-family:'Fredoka One',cursive;font-size:.85rem;text-align:center;padding:6px;border-radius:8px;color:white;margin-bottom:2px;}
+.mlabel-term{background:var(--navy);}
+.mlabel-def {background:#636E72;}
+.match-item{border-radius:10px;padding:10px 10px;font-size:.82rem;font-weight:700;border:2.5px solid #CCC;background:var(--white);cursor:pointer;text-align:center;transition:all .15s;line-height:1.3;box-shadow:0 2px 6px var(--shadow);}
+.match-item:hover{transform:translateY(-1px);}
+.match-item.sel-a{border-color:var(--navy);background:#F0EBE3;box-shadow:0 0 0 3px rgba(45,52,54,.15);}
+.match-item.matched-correct{border-color:var(--equity);background:var(--equity-l);color:#007A65;pointer-events:none;}
+.match-item.matched-wrong{border-color:var(--liab);background:var(--liab-l);pointer-events:none;animation:shake .3s ease;}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.match-score{background:var(--white);border-radius:12px;padding:12px;text-align:center;margin-top:10px;border:2px solid #DDD;display:none;}
+.match-score.show{display:block;}
+.match-score .ms-num{font-family:'Fredoka One',cursive;font-size:1.8rem;color:var(--equity);}
+.match-score .ms-msg{font-size:.88rem;font-weight:600;color:#555;margin-top:2px;}
+
+/* CYCLE */
+.cycle-intro{background:var(--white);border-radius:16px;border:2.5px solid var(--navy);box-shadow:4px 4px 0 var(--navy);padding:16px;margin-bottom:12px;}
+.cycle-intro p{font-size:.9rem;line-height:1.6;font-weight:600;}
+.cycle-steps{display:flex;flex-direction:column;gap:0;}
+.cycle-step{display:flex;gap:12px;align-items:flex-start;padding:14px 14px;background:var(--white);border-radius:14px;border:2.5px solid var(--navy);margin-bottom:8px;box-shadow:3px 3px 0 var(--navy);cursor:pointer;transition:all .15s;position:relative;}
+.cycle-step:hover{transform:translateY(-2px);box-shadow:3px 5px 0 var(--navy);}
+.cycle-step.open{background:var(--gold);}
+.cs-num{font-family:'Fredoka One',cursive;font-size:1.6rem;color:var(--navy);line-height:1;min-width:32px;}
+.cs-body{flex:1;}
+.cs-name{font-family:'Fredoka One',cursive;font-size:1.05rem;color:var(--navy);}
+.cs-short{font-size:.82rem;font-weight:700;color:#666;margin-top:2px;}
+.cs-detail{font-size:.85rem;font-weight:600;line-height:1.55;margin-top:8px;color:var(--navy);display:none;}
+.cycle-step.open .cs-detail{display:block;}
+.cycle-step.open .cs-short{display:none;}
+.cs-arrow{font-size:.9rem;color:#AAA;align-self:center;}
+.cycle-step.open .cs-arrow{transform:rotate(180deg);}
+
+/* CYCLE QUIZ */
+.cycle-order-wrap{}
+.order-instruction{background:var(--white);border-radius:12px;padding:10px 14px;font-size:.86rem;font-weight:700;margin-bottom:10px;border:2px solid #DDD;text-align:center;}
+.order-pool{display:flex;flex-wrap:wrap;gap:7px;background:rgba(255,255,255,.5);border-radius:12px;padding:10px;border:2px dashed #C0B9B0;min-height:48px;margin-bottom:12px;}
+.order-card{background:var(--white);border:2.5px solid #CCC;border-radius:9px;padding:8px 12px;font-size:.83rem;font-weight:700;cursor:pointer;transition:all .15s;box-shadow:0 2px 6px var(--shadow);}
+.order-card:hover{border-color:var(--navy);transform:translateY(-1px);}
+.order-card.picked{border-color:var(--navy);background:#F0EBE3;}
+.order-slots{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;}
+.order-slot{border-radius:9px;border:2.5px dashed #CCC;padding:10px 12px;font-size:.83rem;font-weight:700;color:#AAA;min-height:40px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:border-color .15s;}
+.order-slot:hover{border-color:#888;}
+.order-slot.filled{border-style:solid;border-color:var(--navy);background:var(--white);color:var(--navy);}
+.order-slot.correct-slot{border-color:var(--equity);background:var(--equity-l);color:#007A65;}
+.order-slot.wrong-slot{border-color:var(--liab);background:var(--liab-l);color:#A32020;}
+.slot-num{font-family:'Fredoka One',cursive;font-size:1.1rem;color:#CCC;min-width:22px;}
+.order-slot.filled .slot-num,.order-slot.correct-slot .slot-num,.order-slot.wrong-slot .slot-num{color:var(--navy);}
+.game-btn{width:100%;padding:13px;background:var(--navy);color:var(--gold);font-family:'Fredoka One',cursive;font-size:1.1rem;border:none;border-radius:12px;cursor:pointer;box-shadow:0 3px 10px var(--shadow);transition:transform .1s;margin-top:4px;letter-spacing:.5px;}
+.game-btn:active{transform:scale(.98);}
+.game-btn:disabled{opacity:.4;cursor:default;}
+.game-result{background:var(--white);border-radius:12px;padding:14px;text-align:center;margin-top:10px;display:none;border:2px solid #DDD;}
+.game-result.show{display:block;}
+.gr-score{font-family:'Fredoka One',cursive;font-size:2rem;color:var(--equity);}
+.gr-msg{font-size:.88rem;font-weight:600;color:#555;margin-top:2px;}
+.retry-btn{margin-top:10px;background:none;border:2.5px solid var(--navy);border-radius:8px;padding:7px 20px;font-family:'Fredoka One',cursive;font-size:.9rem;cursor:pointer;color:var(--navy);transition:background .15s;}
+.retry-btn:hover{background:var(--gold);}
+
+/* QUIZ */
+.q-card{background:var(--white);border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:0 2px 10px var(--shadow);border:2px solid #E0D8CE;}
+.q-text{font-weight:700;font-size:.93rem;margin-bottom:10px;line-height:1.45;}
+.q-opts{display:flex;flex-direction:column;gap:6px;}
+.q-btn{padding:10px 14px;border-radius:10px;border:2.5px solid #CCC;background:var(--soft);font-family:'Quicksand',sans-serif;font-size:.88rem;font-weight:700;cursor:pointer;text-align:left;transition:all .15s;}
+.q-btn:hover{border-color:var(--navy);}
+.q-btn.correct-ans{background:var(--equity-l);border-color:var(--equity);color:#007A65;}
+.q-btn.wrong-ans{background:var(--liab-l);border-color:var(--liab);color:#A32020;}
+.q-btn.disabled{pointer-events:none;opacity:.6;}
+.q-feedback{margin-top:8px;font-size:.84rem;font-weight:700;display:none;padding:8px 10px;border-radius:8px;}
+.q-feedback.show{display:block;}
+.q-feedback.fb-c{background:var(--equity-l);color:#007A65;}
+.q-feedback.fb-w{background:var(--liab-l);color:#A32020;}
+
+/* MEMORY CARD */
+.memory-card{background:var(--gold);border-radius:16px;border:2.5px solid var(--navy);box-shadow:4px 4px 0 var(--navy);padding:16px 18px;margin-bottom:10px;}
+.mc-title{font-family:'Fredoka One',cursive;font-size:1.05rem;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.mc-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:6px;font-size:.88rem;font-weight:700;line-height:1.4;}
+.mc-tag{background:var(--navy);color:var(--gold);border-radius:20px;padding:2px 10px;font-size:.75rem;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+
+/* FADE IN */
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.page.active>*{animation:fadeUp .35s ease both;}
+.page.active>*:nth-child(1){animation-delay:.04s;}
+.page.active>*:nth-child(2){animation-delay:.08s;}
+.page.active>*:nth-child(3){animation-delay:.12s;}
+.page.active>*:nth-child(4){animation-delay:.16s;}
+.page.active>*:nth-child(5){animation-delay:.20s;}
+
+footer{text-align:center;padding:14px;font-size:.74rem;color:#AAA;font-weight:600;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Accounting <span>Concepts</span> & Cycle</h1>
+  <p>Grade 8 Support Class · Tap, sort & quiz your way to understanding</p>
+  <div class="pill-row">
+    <span class="pill">📦 Assets</span>
+    <span class="pill">💳 Liabilities</span>
+    <span class="pill">👤 Equity</span>
+    <span class="pill">📈 Income</span>
+    <span class="pill">📉 Expenses</span>
+    <span class="pill">🔄 The Cycle</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <button class="nav-btn active" onclick="showPage('concepts',this)">💡 Concepts</button>
+  <button class="nav-btn" onclick="showPage('equation',this)">⚖️ Equation</button>
+  <button class="nav-btn" onclick="showPage('match',this)">🃏 Match Game</button>
+  <button class="nav-btn" onclick="showPage('cycle',this)">🔄 The Cycle</button>
+  <button class="nav-btn" onclick="showPage('order',this)">🔢 Order Game</button>
+  <button class="nav-btn" onclick="showPage('quiz',this)">🧩 Quiz</button>
+</nav>
+
+<!-- ═══════════════════════════════ CONCEPTS ═══════════════════════════════ -->
+<div id="page-concepts" class="page active">
+
+  <p class="slabel">📌 The 5 core building blocks of accounting</p>
+
+  <div class="concept-grid">
+
+    <div class="concept-card cc-asset" data-icon="📦">
+      <div class="cc-header">
+        <span class="cc-badge badge-asset">ASSET</span>
+        <span class="cc-title title-asset">Something the business OWNS</span>
+      </div>
+      <div class="cc-def">An asset is anything valuable that belongs to the business — something it owns or money owed to it by others.</div>
+      <div class="cc-example ex-asset">📌 Examples: Cash, equipment, stock, debtors (people who owe you money), vehicles, buildings</div>
+      <div class="cc-trick ex-asset">🧠 Trick: <em>"Can I sell it or use it to make money?"</em> → If YES, it's probably an asset.</div>
+    </div>
+
+    <div class="concept-card cc-liab" data-icon="💳">
+      <div class="cc-header">
+        <span class="cc-badge badge-liab">LIABILITY</span>
+        <span class="cc-title title-liab">Something the business OWES</span>
+      </div>
+      <div class="cc-def">A liability is any debt or obligation — money the business still needs to pay to someone else.</div>
+      <div class="cc-example ex-liab">📌 Examples: Bank loan, creditors (businesses you owe), mortgage, overdraft</div>
+      <div class="cc-trick ex-liab">🧠 Trick: <em>"Does the business owe someone money?"</em> → If YES, it's a liability.</div>
+    </div>
+
+    <div class="concept-card cc-equity" data-icon="👤">
+      <div class="cc-header">
+        <span class="cc-badge badge-equity">OWNER'S EQUITY</span>
+        <span class="cc-title title-equity">What the owner is OWED</span>
+      </div>
+      <div class="cc-def">Equity is the owner's stake in the business — what's left after all debts are paid. Also called Capital.</div>
+      <div class="cc-example ex-equity">📌 Examples: Capital invested, retained profit, drawings (reduces equity)</div>
+      <div class="cc-trick ex-equity">🧠 Trick: <em>Assets – Liabilities = Equity.</em> It's the owner's "slice" of everything.</div>
+    </div>
+
+    <div class="concept-card cc-income" data-icon="📈">
+      <div class="cc-header">
+        <span class="cc-badge badge-income">INCOME</span>
+        <span class="cc-title title-income">Money the business EARNS</span>
+      </div>
+      <div class="cc-def">Income (revenue) is money received from selling goods or services. It increases equity.</div>
+      <div class="cc-example ex-income">📌 Examples: Sales, fees received, rent income, interest received</div>
+      <div class="cc-trick ex-income">🧠 Trick: <em>"Did the business earn this by doing what it does?"</em> → Income!</div>
+    </div>
+
+    <div class="concept-card cc-expense" data-icon="📉">
+      <div class="cc-header">
+        <span class="cc-badge badge-expense">EXPENSE</span>
+        <span class="cc-title title-expense">Money the business SPENDS</span>
+      </div>
+      <div class="cc-def">Expenses are the costs of running the business. They reduce profit and therefore reduce equity.</div>
+      <div class="cc-example ex-expense">📌 Examples: Rent, salaries, electricity, stationery, advertising, insurance</div>
+      <div class="cc-trick ex-expense">🧠 Trick: <em>"Did the business spend money to keep running?"</em> → Expense!</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ EQUATION ═══════════════════════════════ -->
+<div id="page-equation" class="page">
+
+  <p class="slabel">⚖️ The golden rule of accounting</p>
+
+  <div class="equation-wrap">
+    <div class="eq-title">The Accounting Equation</div>
+    <div class="eq-row">
+      <div class="eq-box eq-asset"><div class="eb-name">Assets</div><div class="eb-hint">What you OWN</div></div>
+      <div class="eq-sign">=</div>
+      <div class="eq-box eq-liab"><div class="eb-name">Liabilities</div><div class="eb-hint">What you OWE</div></div>
+      <div class="eq-sign">+</div>
+      <div class="eq-box eq-equity"><div class="eb-name">Equity</div><div class="eb-hint">Owner's share</div></div>
+    </div>
+    <div class="eq-note">⚖️ This equation must ALWAYS balance. Every single transaction keeps it in balance.</div>
+  </div>
+
+  <div class="memory-card">
+    <div class="mc-title">🧠 How each element affects the equation</div>
+    <div class="mc-row"><span class="mc-tag">ASSET ↑</span> Business buys equipment — Assets go UP</div>
+    <div class="mc-row"><span class="mc-tag">LIABILITY ↑</span> Business takes a loan — Liabilities go UP (and so does Cash asset)</div>
+    <div class="mc-row"><span class="mc-tag">EQUITY ↑</span> Owner puts in money — Equity (Capital) goes UP</div>
+    <div class="mc-row"><span class="mc-tag">INCOME ↑</span> Business makes a sale — Income goes UP → Equity goes UP</div>
+    <div class="mc-row"><span class="mc-tag">EXPENSE ↑</span> Business pays rent — Expense goes UP → Equity goes DOWN</div>
+  </div>
+
+  <p class="slabel">🧮 Try these equation checks</p>
+
+  <div id="eq-checks"></div>
+
+  <button class="game-btn" id="eq-check-btn" onclick="checkEquation()">✅ Check My Answers</button>
+  <div class="game-result" id="eq-result">
+    <div class="gr-score" id="eq-score"></div>
+    <div class="gr-msg" id="eq-msg"></div>
+    <button class="retry-btn" onclick="buildEquation()">🔄 Try Again</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ MATCH GAME ═══════════════════════════════ -->
+<div id="page-match" class="page">
+
+  <p class="slabel">🃏 Tap a TERM, then tap its DEFINITION</p>
+
+  <div class="match-instruction">Tap a word on the left, then tap its meaning on the right. Match all 8 pairs!</div>
+
+  <div class="match-cols">
+    <div class="match-col">
+      <div class="match-col-label mlabel-term">📝 TERMS</div>
+      <div id="terms-col"></div>
+    </div>
+    <div class="match-col">
+      <div class="match-col-label mlabel-def">💬 MEANINGS</div>
+      <div id="defs-col"></div>
+    </div>
+  </div>
+
+  <div class="match-score" id="match-score">
+    <div class="ms-num" id="match-score-num"></div>
+    <div class="ms-msg" id="match-score-msg"></div>
+    <button class="retry-btn" style="margin-top:8px;" onclick="buildMatch()">🔄 Play Again</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ CYCLE ═══════════════════════════════ -->
+<div id="page-cycle" class="page">
+
+  <p class="slabel">🔄 The accounting cycle — tap each step to expand</p>
+
+  <div class="cycle-intro">
+    <p>The accounting cycle is the <strong>step-by-step process</strong> every business follows to record, organise and report its financial information. It repeats every accounting period.</p>
+  </div>
+
+  <div class="cycle-steps" id="cycle-steps"></div>
+
+  <div class="memory-card" style="margin-top:6px;">
+    <div class="mc-title">🧠 Easy way to remember the order</div>
+    <div style="font-size:.9rem;font-weight:700;line-height:1.8;text-align:center;">
+      <span style="color:#0984E3">Identify</span> →
+      <span style="color:#6C5CE7">Analyse</span> →
+      <span style="color:#E17055">Record</span> →
+      <span style="color:#00B894">Post</span> →
+      <span style="color:#D63031">Balance</span> →
+      <span style="color:#FDCB6E;text-shadow:0 0 0 #000,-1px -1px 0 #555,1px -1px 0 #555,-1px 1px 0 #555,1px 1px 0 #555">Report</span> →
+      <span style="color:#636E72">Close</span>
+    </div>
+    <div style="margin-top:6px;font-size:.82rem;font-weight:700;text-align:center;color:#5D4037;">
+      "<em>I Always Record Properly Before Reporting Clearly</em>"
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ ORDER GAME ═══════════════════════════════ -->
+<div id="page-order" class="page">
+
+  <p class="slabel">🔢 Put the accounting cycle in the right order</p>
+
+  <div class="order-instruction">Tap a step from the pool, then tap a slot to place it. Fill all 7 slots in order!</div>
+
+  <div class="order-pool" id="order-pool"></div>
+  <div class="order-slots" id="order-slots"></div>
+
+  <button class="game-btn" id="order-btn" onclick="checkOrder()" disabled>✅ Check My Order</button>
+  <div class="game-result" id="order-result">
+    <div class="gr-score" id="order-score"></div>
+    <div class="gr-msg" id="order-msg"></div>
+    <button class="retry-btn" onclick="buildOrder()">🔄 Try Again</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ QUIZ ═══════════════════════════════ -->
+<div id="page-quiz" class="page">
+
+  <p class="slabel">🧩 Test what you know — 10 questions</p>
+
+  <div id="quiz-container"></div>
+
+</div>
+
+<footer>Grade 8 Accounting Support · Concepts & Cycle · Learn it, sort it, own it 💛</footer>
+
+<script>
+// ══════════════ DATA ══════════════
+
+const cycleSteps = [
+  {num:1, name:"Identify Source Documents", short:"Find proof that a transaction happened.", detail:"Every transaction needs proof. Source documents include invoices, receipts, bank statements, and till slips. No document → no entry in the books. Ask: Did a financial transaction actually happen?"},
+  {num:2, name:"Analyse the Transaction", short:"Figure out which accounts are affected.", detail:"Decide: which accounts change? Does money come IN or go OUT? Is this income, expense, asset or liability? This is the thinking step before you write anything down."},
+  {num:3, name:"Record in Journals", short:"Write the transaction in the correct journal.", detail:"Journals are the first place transactions are written. CRJ for cash in, CPJ for cash out, etc. Every entry shows what changed, by how much, and when."},
+  {num:4, name:"Post to the Ledger", short:"Copy journal entries into T-accounts.", detail:"The General Ledger has a separate account for every item (Cash, Rent, Salaries…). You copy (post) each journal entry to the correct T-account. This organises everything by account type."},
+  {num:5, name:"Draw up Trial Balance", short:"Check that total debits = total credits.", detail:"List all account balances in two columns: debits and credits. If they balance, great! If not, there's an error somewhere. This is the accountant's first error-check."},
+  {num:6, name:"Prepare Financial Statements", short:"Produce the Income Statement and Balance Sheet.", detail:"Income Statement: Did we make a profit or a loss?\nBalance Sheet: What do we own (assets) vs what do we owe (liabilities + equity)? These reports tell the story of the business."},
+  {num:7, name:"Close the Books", short:"Reset income & expense accounts to zero.", detail:"At year-end, all income and expense accounts are closed — their totals transferred to equity. Asset and liability accounts carry forward. Now the business is ready to start the next period fresh."},
+];
+
+const matchPairs = [
+  {term:"Asset",           def:"Something the business owns or is owed"},
+  {term:"Liability",       def:"A debt the business must pay to someone else"},
+  {term:"Equity / Capital",def:"The owner's personal stake in the business"},
+  {term:"Income",          def:"Money earned from selling goods or services"},
+  {term:"Expense",         def:"Money spent to keep the business running"},
+  {term:"Debtor",          def:"A customer who owes the business money"},
+  {term:"Creditor",        def:"A supplier the business owes money to"},
+  {term:"Source Document", def:"Proof that a financial transaction happened"},
+];
+
+const quizData = [
+  {q:"A business owns a delivery van. Which concept does this fall under?",opts:["Liability","Asset","Expense","Income"],ans:1,fb:"✅ The van is owned by the business — it's an Asset. Assets are things the business owns."},
+  {q:"The business owes R5 000 on a bank loan. This is a…",opts:["Asset","Income","Liability","Equity"],ans:2,fb:"✅ Money owed to the bank is a Liability — an obligation the business must pay."},
+  {q:"A customer pays cash for a haircut. Where does the R80 go?",opts:["Expense","Asset only","Income","Liability"],ans:2,fb:"✅ The business earned R80 — that's Income (revenue). It also increases the Cash asset."},
+  {q:"The owner pays R1 200 for monthly rent. This is recorded as…",opts:["Asset","Expense","Income","Liability"],ans:1,fb:"✅ Rent is a cost of running the business → it's an Expense."},
+  {q:"The owner invests R20 000 of her own money into the business. This increases…",opts:["Liabilities","Expenses","Equity / Capital","Income"],ans:2,fb:"✅ The owner's investment builds up the business's Capital — that's Equity."},
+  {q:"Which step of the accounting cycle comes FIRST?",opts:["Post to Ledger","Identify Source Documents","Draw up Trial Balance","Close the Books"],ans:1,fb:"✅ The cycle starts with identifying source documents — proof a transaction happened."},
+  {q:"The Trial Balance checks that…",opts:["Assets = Liabilities","Income > Expenses","Total Debits = Total Credits","The owner is happy"],ans:2,fb:"✅ The Trial Balance checks that all debits equal all credits — the double-entry system must balance."},
+  {q:"Stock that the business bought to sell is classified as…",opts:["Expense","Asset","Liability","Income"],ans:1,fb:"✅ Stock (inventory) is owned by the business and will generate income when sold — it's an Asset."},
+  {q:"A business takes out a R10 000 loan. What happens to the accounting equation?",opts:["Assets ↑, Equity ↑","Assets ↑, Liabilities ↑","Liabilities ↑, Equity ↓","Nothing changes"],ans:1,fb:"✅ The cash received (Asset ↑) is matched by the loan obligation (Liability ↑). The equation stays balanced!"},
+  {q:"Which financial statement answers: 'Did the business make a profit?'",opts:["Balance Sheet","Trial Balance","Income Statement","Source Document"],ans:2,fb:"✅ The Income Statement (or Profit & Loss) shows income minus expenses = profit or loss."},
+];
+
+// ══════════════ NAV ══════════════
+function showPage(id, btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ══════════════ EQUATION GAME ══════════════
+const eqScenarios = [
+  {text:"Business has R8 000 cash, owes R3 000 to the bank.", a:8000, l:3000, e:5000},
+  {text:"Business owns stock worth R5 000 and equipment worth R2 000. No debts.", a:7000, l:0, e:7000},
+  {text:"Assets total R15 000. Liabilities are R6 000. What is Equity?", a:15000, l:6000, e:9000},
+];
+let eqIdx = 0;
+function buildEquation(){
+  eqIdx = Math.floor(Math.random()*eqScenarios.length);
+  const s = eqScenarios[eqIdx];
+  const container = document.getElementById('eq-checks');
+  container.innerHTML = `
+    <div class="q-card">
+      <div class="q-text">${s.text}</div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:4px;">
+        <label style="font-weight:700;font-size:.85rem;">Assets R</label>
+        <input id="eq-a" type="number" style="width:90px;padding:6px 8px;border-radius:8px;border:2px solid #CCC;font-family:Quicksand,sans-serif;font-size:.9rem;font-weight:700;" placeholder="?">
+        <span style="font-family:'Fredoka One',cursive;font-size:1.1rem;">=</span>
+        <label style="font-weight:700;font-size:.85rem;">Liabilities R</label>
+        <input id="eq-l" type="number" style="width:90px;padding:6px 8px;border-radius:8px;border:2px solid #CCC;font-family:Quicksand,sans-serif;font-size:.9rem;font-weight:700;" placeholder="?">
+        <span style="font-family:'Fredoka One',cursive;font-size:1.1rem;">+</span>
+        <label style="font-weight:700;font-size:.85rem;">Equity R</label>
+        <input id="eq-e" type="number" style="width:90px;padding:6px 8px;border-radius:8px;border:2px solid #CCC;font-family:Quicksand,sans-serif;font-size:.9rem;font-weight:700;" placeholder="?">
+      </div>
+    </div>`;
+  document.getElementById('eq-result').classList.remove('show');
+  document.getElementById('eq-check-btn').disabled = false;
+}
+function checkEquation(){
+  const s = eqScenarios[eqIdx];
+  const a = parseInt(document.getElementById('eq-a').value)||0;
+  const l = parseInt(document.getElementById('eq-l').value)||0;
+  const e = parseInt(document.getElementById('eq-e').value)||0;
+  let score = 0;
+  if(a===s.a) score++;
+  if(l===s.l) score++;
+  if(e===s.e) score++;
+  const res = document.getElementById('eq-result');
+  document.getElementById('eq-score').textContent = score + ' / 3';
+  document.getElementById('eq-msg').textContent = score===3 ? '🏆 Perfect! The equation balances!' : `Correct values: Assets R${s.a} = Liabilities R${s.l} + Equity R${s.e}`;
+  res.classList.add('show');
+  document.getElementById('eq-check-btn').disabled = true;
+}
+
+// ══════════════ MATCH GAME ══════════════
+let selTerm = null, selDef = null, matchedCount = 0;
+function buildMatch(){
+  selTerm=null; selDef=null; matchedCount=0;
+  const terms = [...matchPairs].sort(()=>Math.random()-.5);
+  const defs  = [...matchPairs].sort(()=>Math.random()-.5);
+  const tc = document.getElementById('terms-col');
+  const dc = document.getElementById('defs-col');
+  tc.innerHTML=''; dc.innerHTML='';
+  document.getElementById('match-score').classList.remove('show');
+  terms.forEach(p=>{
+    const el=document.createElement('div');
+    el.className='match-item';
+    el.textContent=p.term;
+    el.dataset.key=p.term;
+    el.dataset.side='term';
+    el.onclick=()=>matchClick(el);
+    tc.appendChild(el);
+  });
+  defs.forEach(p=>{
+    const el=document.createElement('div');
+    el.className='match-item';
+    el.textContent=p.def;
+    el.dataset.key=p.term; // use term as key
+    el.dataset.side='def';
+    el.onclick=()=>matchClick(el);
+    dc.appendChild(el);
+  });
+}
+function matchClick(el){
+  if(el.classList.contains('matched-correct')) return;
+  if(el.dataset.side==='term'){
+    if(selTerm) selTerm.classList.remove('sel-a');
+    selTerm=el;
+    el.classList.add('sel-a');
+  } else {
+    if(selDef) selDef.classList.remove('sel-a');
+    selDef=el;
+    el.classList.add('sel-a');
+  }
+  if(selTerm && selDef){
+    const correct = selTerm.dataset.key === selDef.dataset.key;
+    if(correct){
+      selTerm.classList.remove('sel-a'); selTerm.classList.add('matched-correct');
+      selDef.classList.remove('sel-a');  selDef.classList.add('matched-correct');
+      matchedCount++;
+      if(matchedCount===matchPairs.length){
+        const sc=document.getElementById('match-score');
+        document.getElementById('match-score-num').textContent='🎉 All '+matchPairs.length+' matched!';
+        document.getElementById('match-score-msg').textContent='You know all the key accounting terms!';
+        sc.classList.add('show');
+      }
+    } else {
+      selTerm.classList.add('matched-wrong');
+      selDef.classList.add('matched-wrong');
+      const t=selTerm, d=selDef;
+      setTimeout(()=>{
+        t.classList.remove('matched-wrong','sel-a');
+        d.classList.remove('matched-wrong','sel-a');
+      },600);
+    }
+    selTerm=null; selDef=null;
+  }
+}
+
+// ══════════════ CYCLE STEPS ══════════════
+function buildCycle(){
+  const container = document.getElementById('cycle-steps');
+  container.innerHTML='';
+  cycleSteps.forEach(s=>{
+    const el=document.createElement('div');
+    el.className='cycle-step';
+    el.innerHTML=`
+      <div class="cs-num">${s.num}</div>
+      <div class="cs-body">
+        <div class="cs-name">${s.name}</div>
+        <div class="cs-short">${s.short}</div>
+        <div class="cs-detail">${s.detail.replace(/\n/g,'<br>')}</div>
+      </div>
+      <div class="cs-arrow">▼</div>`;
+    el.onclick=()=>el.classList.toggle('open');
+    container.appendChild(el);
+  });
+}
+
+// ══════════════ ORDER GAME ══════════════
+let orderPicked=null, orderPlaced={};
+function buildOrder(){
+  orderPicked=null; orderPlaced={};
+  const shuffled=[...cycleSteps].sort(()=>Math.random()-.5);
+  const pool=document.getElementById('order-pool');
+  const slots=document.getElementById('order-slots');
+  pool.innerHTML=''; slots.innerHTML='';
+  document.getElementById('order-result').classList.remove('show');
+  document.getElementById('order-btn').disabled=true;
+  shuffled.forEach(s=>{
+    const el=document.createElement('div');
+    el.className='order-card';
+    el.textContent=s.name;
+    el.dataset.num=s.num;
+    el.id='ocard-'+s.num;
+    el.onclick=()=>pickOrderCard(el);
+    pool.appendChild(el);
+  });
+  for(let i=1;i<=7;i++){
+    const sl=document.createElement('div');
+    sl.className='order-slot';
+    sl.dataset.slot=i;
+    sl.innerHTML=`<span class="slot-num">${i}</span><span class="slot-text">Tap a step above, then tap here…</span>`;
+    sl.onclick=()=>placeInSlot(i);
+    slots.appendChild(sl);
+  }
+}
+function pickOrderCard(el){
+  if(el.classList.contains('placed')) return;
+  document.querySelectorAll('.order-card').forEach(c=>c.classList.remove('picked'));
+  orderPicked=el;
+  el.classList.add('picked');
+}
+function placeInSlot(slotNum){
+  if(!orderPicked) return;
+  const sl=document.querySelector(`.order-slot[data-slot="${slotNum}"]`);
+  // if slot already filled, swap back
+  if(orderPlaced[slotNum]){
+    const prevNum=orderPlaced[slotNum];
+    const prevCard=document.getElementById('ocard-'+prevNum);
+    if(prevCard){ prevCard.style.display=''; prevCard.classList.remove('placed','picked'); }
+  }
+  orderPlaced[slotNum]=orderPicked.dataset.num;
+  sl.className='order-slot filled';
+  sl.innerHTML=`<span class="slot-num">${slotNum}</span><span class="slot-text">${orderPicked.textContent}</span>`;
+  sl.dataset.slot=slotNum;
+  sl.onclick=()=>placeInSlot(slotNum);
+  orderPicked.style.display='none';
+  orderPicked.classList.remove('picked');
+  orderPicked=null;
+  if(Object.keys(orderPlaced).length===7) document.getElementById('order-btn').disabled=false;
+}
+function checkOrder(){
+  let correct=0;
+  for(let i=1;i<=7;i++){
+    const sl=document.querySelector(`.order-slot[data-slot="${i}"]`);
+    const placed=parseInt(orderPlaced[i]);
+    if(placed===i){ correct++; sl.className='order-slot correct-slot'; sl.querySelector('.slot-num').style.color=''; }
+    else          {             sl.className='order-slot wrong-slot';   }
+  }
+  const res=document.getElementById('order-result');
+  document.getElementById('order-score').textContent=correct+' / 7';
+  const msgs=[[7,'🏆 Perfect order! You know the cycle cold!'],[5,'🎉 Nearly there — check the highlighted ones!'],[3,'💪 Good try! Review the cycle page and retry!'],[0,'📚 Keep going — use the Cycle page to help you!']];
+  document.getElementById('order-msg').textContent=msgs.find(m=>correct>=m[0])[1];
+  res.classList.add('show');
+  document.getElementById('order-btn').disabled=true;
+}
+
+// ══════════════ QUIZ ══════════════
+function buildQuiz(){
+  const c=document.getElementById('quiz-container');
+  c.innerHTML='';
+  quizData.forEach((q,qi)=>{
+    const card=document.createElement('div');
+    card.className='q-card';
+    const optsHtml=q.opts.map((o,oi)=>
+      `<button class="q-btn" onclick="quizAns(this,${qi},${oi})">${o}</button>`
+    ).join('');
+    card.innerHTML=`<div class="q-text">${qi+1}. ${q.q}</div><div class="q-opts">${optsHtml}</div><div class="q-feedback"></div>`;
+    c.appendChild(card);
+  });
+}
+function quizAns(btn,qi,oi){
+  const card=btn.closest('.q-card');
+  card.querySelectorAll('.q-btn').forEach(b=>b.classList.add('disabled'));
+  const correct=oi===quizData[qi].ans;
+  btn.classList.add(correct?'correct-ans':'wrong-ans');
+  if(!correct) card.querySelectorAll('.q-btn')[quizData[qi].ans].classList.add('correct-ans');
+  const fb=card.querySelector('.q-feedback');
+  fb.textContent=quizData[qi].fb;
+  fb.className='q-feedback show '+(correct?'fb-c':'fb-w');
+}
+
+// ══════════════ INIT ══════════════
+buildEquation();
+buildMatch();
+buildCycle();
+buildOrder();
+buildQuiz();
+</script>
+</body>
+</html>
